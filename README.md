@@ -51,7 +51,7 @@ After obtaining "Access key ID" and "Secret access key". Navigate to ```secrets.
 The AIPatient interface is designed with [streamlit](https://streamlit.io). To run the app locally:
 ```
 cd src
-streamlit run rag_streamlit.py
+streamlit run AIPatient_Interface.py
 ```
 
 ### Demo
