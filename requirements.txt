@@ -1,0 +1,11 @@
+streamlit
+matplotlib
+networkx
+pandas
+neo4j
+streamlit_chat
+py2neo
+streamlit-agraph
+anthropic
+botocore
+boto3
