@@ -67,7 +67,7 @@ Huizi Yu,  huiziy@amazon.com, Data Scientist @ Amazon Science, VA, US
 The source code of AIPatient is licensed under [Apache 2.0](https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE). The intended purpose is solely for research use.
 
 ## Disclaimer
-AIPatient is developed using Amazon Bedrock to comform with the [Resonsible Data Use Agreement](https://physionet.org/news/post/gpt-responsible-use). We confirm the data is not shared with third parties, including sending it through APIs or using it in online platforms.
+AIPatient is powered by Anthropic's Claude 3.5 Sonnet via Amazon Bedrock to comform with the [Resonsible Data Use Agreement](https://physionet.org/news/post/gpt-responsible-use). We confirm the data is not shared with third parties, including sending it through APIs or using it in online platforms.
 
 This repo contains code for agents and QA Interface; some data cleaning and knowledge graph creation code are omitted and will be made public after paper publication. 
 
