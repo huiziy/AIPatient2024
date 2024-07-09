@@ -56,7 +56,11 @@ streamlit run rag_streamlit.py
 ### Demo
 
 
-## News
+## Our Core Team
+Huizi Yu,  huiziy@amazon.com, Data Scientist @ Amazon Science, VA, US
+Lizhou Fan, lizhouf@umich.edu, Research Fellow @ Harvard Medical School (Incoming), MA, US
+Jiayan Zhou, jyzhou@stanford.edu, Research Fellow @ Stanford University, CA, US
+Lingyao Li, lingyaol@umich.edu, Assistant Professor @ South Florida University (Incoming), FL, US
 
 ## License
 The source code of AIPatient is licensed under [Apache 2.0](https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE). The intended purpose is solely for research use.
@@ -64,5 +68,5 @@ The source code of AIPatient is licensed under [Apache 2.0](https://github.com/t
 ## Disclaimer
 AIPatient is developed using Amazon Bedrock to comform with the [Resonsible Data Use Agreement](https://physionet.org/news/post/gpt-responsible-use). We confirm the data is not shared with third parties, including sending it through APIs or using it in online platforms.
 
-This repo contains code for agents and QA Interface
+This repo contains code for agents and QA Interface; some data cleaning and knowledge graph creation code are omitted and will be made public after paper publication. 
 
