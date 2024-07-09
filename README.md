@@ -5,7 +5,7 @@
 <img align="center" width="854" alt="Overview" src="fig/AIPatient_Fig1.png">
 <p align="center"><strong>Figure 1:</strong> AIPatient Structure</p>
 
-<p align="center" style="font-size:24;><strong>Realistic</strong> -- <strong>Diverse</strong> -- <strong>Factual</strong> -- <strong>Scalable</strong></p>
+<p align="center"><strong style="font-size:0.5em;">Realistic</strong> -- <strong>Diverse</strong> -- <strong>Factual</strong> -- <strong>Scalable</strong></p>
 
 **Motivation:** Traditional medical education faces many challenges, including limited access to diverse clinical experiences, inconsistency in training, high costs, and the limited availability of standardized patients. Integrating new technologies such as Large Language Models (LLM) can enhance the learning experience and improve training outcomes. 
 
