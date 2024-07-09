@@ -59,9 +59,9 @@ streamlit run AIPatient_Interface.py
 
 ## Our Core Team
 Huizi Yu,  huiziy@amazon.com, Data Scientist @ Amazon Science, VA, US 
-<br />Lizhou Fan, lizhouf@umich.edu, Research Fellow @ Harvard Medical School (Incoming), MA, US 
+<br />Lizhou Fan, lizhouf@umich.edu, Research Fellow @ Harvard Medical School/Brigham and Women's Hospital (Incoming), MA, US 
 <br />Jiayan Zhou, jyzhou@stanford.edu, Research Fellow @ Stanford University, CA, US
-<br />Lingyao Li, lingyaol@umich.edu, Assistant Professor @ South Florida University (Incoming), FL, US
+<br />Lingyao Li, lingyaol@umich.edu, Research Fellow @ University of Michigan, MI, US
 
 ## License
 The source code of AIPatient is licensed under [Apache 2.0](https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE). The intended purpose is solely for research use.
