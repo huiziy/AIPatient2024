@@ -2,8 +2,6 @@
 
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](https://github.com/huiziy/AIPatient/blob/main/LICENSE)
 
-## Workflow
-
 <img align="center" width="854" alt="Overview" src="fig/AIPatient_Fig1.png">
 <p align="center"><strong>Figure 1:</strong> AIPatient Structure</p>
 
@@ -11,21 +9,21 @@
 
 **Overview:** In this project, we propose **AIPatient**, a LLM powered simulated patient based on Electronic Health Records (EHR) data. Leveraging the MIMIC III dataset, which includes over 46k patients, we began by extracting relevant medical entities and their relationships to construct a comprehensive knowledge graph (KG). Next, we developed a multi-agent system using the Reasoning RAG approach to accurately represent the information within the KG, ensuring minimal hallucination and high factual accuracy. By incorporating personalities, AIPatient can mimic real-life interactions, responding to questions and presenting symptoms in a manner similar to actual patients. In future iterations, we aim to incorporate evaluator agent to provide feedback on user performance, potentially enhancing medical training and ultimately improving patient care outcomes. 
 
-## Multi-agent Design
+## LLM Agent Interaction
 
 <img align="center" width="854" alt="AgentOverview" src="fig/AIPatient_Fig2.png">
 <p align="center"><strong>Figure 2:</strong> AIPatient Multi-Agent</p>
 
 <strong>Figure 2</strong> presents the multi-agent system, designed with Reasoning RAG framework (Retrieval, Reasoning, Generation). Each rounds, agents interact to ensure accurate data retrieval and realistic generation. The system is also memory-perserving to ensure multi-round capabilities. 
 
-## Knowledge Graph Construction
+## From EHR to Knowledge Graph
 
 <img align="center" width="854" alt="EHRKG" src="fig/AIPatient_Fig3a.png">
 <p align="center"><strong>Figure 3:</strong> Knowledge Graph Construction with Electronic Health Records</p>
 
 <strong>Figure 3</strong> provides an example of KG (right) constructed using EHR data (left). In the current KG, we focus on 12 node types (e.g. Admission, Symptom) and 11 relationships (e.g. HAS_SYMPTOM). The rich and diverse notes data in MIMIC III presents opportunities for mining additional medical entities and relationships. 
 
-## Case Example
+## Case Study
 
 <img align="center" width="854" alt="AgentsCase" src="fig/AIPatient_Fig3b.png">
 <p align="center"><strong>Figure 4:</strong> AIPatient Interaction Example (single round) </p>
