@@ -2,7 +2,7 @@
 
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](https://github.com/huiziy/AIPatient/blob/main/LICENSE)
 
-<p align="center" style="font-size:50px;"><strong>Realistic</strong> -- <strong>Diverse</strong> -- <strong>Factual</strong> -- <strong>Scalable</strong></p>
+<h2 align="center"><strong>Realistic</strong> -- <strong>Diverse</strong> -- <strong>Factual</strong> -- <strong>Scalable</strong></h2>
 
 <img align="center" width="854" alt="Overview" src="fig/AIPatient_Fig1.png">
 <p align="center"><strong>Figure 1:</strong> AIPatient Structure</p>
