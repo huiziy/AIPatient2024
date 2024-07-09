@@ -36,14 +36,16 @@ In <strong>Figure 4</strong>, we present one round of user-AIpatient interaction
 conda create --name aipatient python=3.9
 conda activate aipatient
 
-git clone [https://github.com/huiziy/AIPatient.git]
+git clone [https://github.com/huiziy/AIPatient2024.git]
 
-cd AIPatient
+cd AIPatient2024
 pip install -r requirements.txt
 ```
 
 ### Set up API keys
-Currently, AIPatient supports Claude 3.5 Sonnet. To use Claude 3.5 Sonnet as the model, navigate to secrets and add your key after ```anthropic_key```
+Currently, AIPatient supports Claude 3.5 Sonnet. To use Claude 3.5 Sonnet on Amazon Bedrock, follow [this guide](https://docs.anthropic.com/en/api/claude-on-amazon-bedrock) to install AWS CLI, set up AWS IAM account and request access for Claude 3.5 Sonnet. 
+
+After obtaining "Access key ID" and "Secret access key". Navigate to ```secrets.txt``` file in this repo and add your keys after "Access_key_ID" and "Secret_access_key" respectively. 
 
 ### Run AIPatient Interface
 The AIPatient interface is designed with [streamlit](https://streamlit.io). To run the app locally:
