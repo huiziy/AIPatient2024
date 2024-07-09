@@ -56,7 +56,7 @@ streamlit run rag_streamlit.py
 
 
 ## Our Core Team
-<br />Huizi Yu,  huiziy@amazon.com, Data Scientist @ Amazon Science, VA, US 
+Huizi Yu,  huiziy@amazon.com, Data Scientist @ Amazon Science, VA, US 
 <br />Lizhou Fan, lizhouf@umich.edu, Research Fellow @ Harvard Medical School (Incoming), MA, US 
 <br />Jiayan Zhou, jyzhou@stanford.edu, Research Fellow @ Stanford University, CA, US
 <br />Lingyao Li, lingyaol@umich.edu, Assistant Professor @ South Florida University (Incoming), FL, US
