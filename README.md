@@ -2,8 +2,6 @@
 
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](https://github.com/huiziy/AIPatient/blob/main/LICENSE)
 
-*Revolutionize medical training with **AIPatient**: our LLM-powered simulated patient leverages the leading Claude 3.5 Sonnet model and the MIMIC III dataset to offer realistic and diverse clinical scenarios. Enhance your educational experience with accurate, data-driven interactions and comprehensive feedback, all designed to improve training outcomes and patient care. Join us in transforming medical education with cutting-edge technology!*
-
 <img align="center" width="854" alt="Overview" src="fig/AIPatient_Fig1.png">
 <p align="center"><strong>Figure 1:</strong> AIPatient Structure</p>
 
