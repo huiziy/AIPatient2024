@@ -30,7 +30,7 @@
 <img align="center" width="854" alt="AgentsCase" src="fig/AIPatient_Fig3b.png">
 <p align="center"><strong>Figure 4:</strong> AIPatient Interaction Example (single round) </p>
 
-In <strong>Figure 4</strong>, we present one round of user-AIpatient interaction. Beginning with user input query, the backend of AIPatient engages various agents and update the session state accordingly. Finally, the Simulated Patient agent answers the user's query using natural language. 
+In <strong>Figure 4</strong>, we present one round of user-AIPatient interaction. Beginning with user input query, the backend of AIPatient engages various agents and update the session state accordingly. Finally, the Simulated Patient agent answers the user's query using natural language. 
 
 ## QuickStart
 ### Install Environment
