@@ -59,7 +59,7 @@ streamlit run AIPatient_Interface.py
 
 ## Our Core Team
 Huizi Yu,  huiziy@amazon.com, Data Scientist @ Amazon Science, VA, US 
-<br />Lizhou Fan, lizhouf@umich.edu, Research Fellow @ Harvard Medical School/Brigham and Women's Hospital (Incoming), MA, US 
+<br />Lizhou Fan, lizhouf@umich.edu, Research Fellow @ Harvard Medical School (Incoming), MA, US 
 <br />Jiayan Zhou, jyzhou@stanford.edu, Research Fellow @ Stanford University, CA, US
 <br />Lingyao Li, lingyaol@umich.edu, Research Fellow @ University of Michigan, MI, US
 
