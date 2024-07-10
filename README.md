@@ -41,6 +41,9 @@ We are currently working on:
 - Enriching the knowledge graph with additional medical entities and relationships
 - Optimizing for computation efficiency 
 
+AIPatient has implications:
+- Beyond traditional medical settings, systems similar to AIPatient could significantly assisting EMS training by providing realistic, scenario-based training for paramedics and emergency responders, dealing with diverse medical emergencies like trauma assessments or cardiac events. Additionally, it could be used in remote or underserved areas to train healthcare workers on complex case management without the need for physical simulation centers.
+- In educational contexts beyond medical training, systems similar to AIPatient could be adapted for language development, helping students practice terminology and communication skills in different languages. Furthermore, it could be utilized in fields like psychology or social work education, allowing students to engage in simulated interactions with people in need who exhibiting various mental health conditions or social scenarios, enhancing their diagnostic and interpersonal skills.
 
 ## QuickStart
 ### Install Environment
