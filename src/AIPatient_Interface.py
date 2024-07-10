@@ -46,10 +46,11 @@ def main():
 
     uri = "neo4j+s://be1f494b.databases.neo4j.io"
     user = "neo4j"
-    password = "cJZi4Wuo5VCW8KlGX4AX-BpkQ59fg122hg19D_vzngA"
+    password = "<database password>"
     db = Neo4jDatabase(uri, user, password)
     model_type = "claude"
     verbose = False
+    test_run = True
 
     # Initiate the agents for the conversation
     try:
@@ -61,13 +62,24 @@ def main():
 
     # Check if a patient admission is already stored in session state, if not, get a new one
     if 'patient_admission' not in st.session_state:
-        patient_admission = db.get_random_patient_admission()
+        ## Demo run
+        if test_run:
+            patient_admission = {
+                'SubjectID': 17546, 
+                'AdmissionID': 190044  
+            }
+        else:
+            patient_admission = db.get_random_patient_admission()
         st.session_state.patient_admission = patient_admission
         st.session_state.graph_generated = False
-        if verbose:
-            st.session_state.personality_profile = random.choice(personality_profiles) + ["Verbose"]
+        ## Demo Run
+        if test_run:
+            st.session_state.personality_profile = ["Responsible", "Organized", "Analytical","Terse"]
         else:
-            st.session_state.personality_profile = random.choice(personality_profiles) + ["Terse"]
+            if verbose:
+                st.session_state.personality_profile = random.choice(personality_profiles) + ["Verbose"]
+            else:
+                st.session_state.personality_profile = random.choice(personality_profiles) + ["Terse"]
         st.session_state.model = model_type
         st.session_state.conversation_history = f"The patient has ID {patient_admission['SubjectID']}, and the admission ID {patient_admission['AdmissionID']}"
         logging.info(f"New patient drawn: {patient_admission['SubjectID']}")
@@ -138,6 +150,6 @@ def main():
 
 if __name__ == "__main__":
     st.set_page_config(layout="wide")
-    st.title("Virtual Patient Interaction")
+    st.title("AIPatient Interface")
     st.text("Welcome to AIPatient: A Virtual Patient for Medical Education")
     main()

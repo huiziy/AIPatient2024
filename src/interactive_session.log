@@ -1,0 +1,447 @@
+2024-07-09 22:53:57,116 - INFO - New patient drawn: 23709
+2024-07-09 22:54:08,152 - INFO - Graph generated and stored in session state.
+2024-07-09 22:55:09,800 - INFO - New patient drawn: 27243
+2024-07-09 22:55:20,678 - INFO - Graph generated and stored in session state.
+2024-07-09 22:55:49,964 - INFO - New patient drawn: 27007
+2024-07-09 22:55:52,098 - INFO - New patient drawn: 27007
+2024-07-09 22:55:56,715 - INFO - Graph generated and stored in session state.
+2024-07-09 22:56:01,721 - INFO - New patient drawn: 89965
+2024-07-09 22:56:14,569 - INFO - Graph generated and stored in session state.
+2024-07-09 22:57:15,625 - INFO - New patient drawn: 32150
+2024-07-09 22:57:21,295 - INFO - Graph generated and stored in session state.
+2024-07-09 22:59:19,474 - INFO - New patient drawn: 17546
+2024-07-09 22:59:33,315 - INFO - Graph generated and stored in session state.
+2024-07-09 23:04:33,921 - INFO - New patient drawn: 17546
+2024-07-09 23:04:48,065 - INFO - Graph generated and stored in session state.
+2024-07-09 23:06:37,573 - INFO - New patient drawn: 17546
+2024-07-09 23:06:50,903 - INFO - Graph generated and stored in session state.
+2024-07-09 23:08:00,690 - INFO - Extract relevant nodes and edges based on query.
+2024-07-09 23:08:04,159 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:08:04,169 - INFO - Nodes and edges extracted: {'Nodes': ['Symptom'], 'Relationships': ['HAS_SYMPTOM']}
+2024-07-09 23:08:04,170 - INFO - Step 1: Constructing Abstraction Cypher query prompt based on the doctor's query.
+2024-07-09 23:08:04,873 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:08:04,875 - INFO - Abstraction query in natural language generated: What symptoms does the patient have?
+2024-07-09 23:08:04,875 - INFO - Constructing Cypher query prompt based on the abstraction query.
+2024-07-09 23:08:07,780 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:08:07,781 - INFO - Abstraction cypher generated: MATCH (p:Patient {SUBJECT_ID: 17546})
+MATCH (p)-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})
+MATCH (a)-[:HAS_SYMPTOM]->(s:Symptom)
+RETURN s.name AS Symptom
+2024-07-09 23:08:07,782 - INFO - Step 4: Executing the generated Cypher query.
+2024-07-09 23:08:11,118 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:08:11,121 - INFO - Abstraction Query result: ['abd pain', 'chest pain', 'epigastric pain', 'nonradiating epigastric abdominal pain', 'sob']
+2024-07-09 23:08:11,121 - INFO - Step Zero: The doctors has asked about: Could you tell me what are some of your symptoms? You can start with one.
+2024-07-09 23:08:11,121 - INFO - Step One: Constructing Cypher query prompt based on the doctor's query.
+2024-07-09 23:08:11,609 - INFO - Cypher query prompt truncated to 4096 characters.
+2024-07-09 23:08:13,679 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:08:13,682 - INFO - Cypher query generated: MATCH (p:Patient {SUBJECT_ID: 17546})
+OPTIONAL MATCH (p)-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})-[:HAS_SYMPTOM]->(s:Symptom)
+RETURN s.name AS Symptom
+LIMIT 1
+2024-07-09 23:08:13,683 - INFO - Step Three: Executing the generated Cypher query.
+2024-07-09 23:08:15,727 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:08:15,729 - INFO - Query result: Based on the provided information, I can structure the response as follows:
+
+The patient with Subject ID 17546, who has an admission with HADM_ID 190044, is experiencing abdominal pain as a symptom.
+2024-07-09 23:08:15,729 - INFO - Attempt 1: Evaluating the query result.
+2024-07-09 23:08:16,238 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:08:16,240 - INFO - Checked result: Y
+2024-07-09 23:08:16,240 - INFO - Checked result is appropriate. Breaking the loop.
+2024-07-09 23:08:16,241 - INFO - Step Five: Generating the patient response.
+2024-07-09 23:08:17,572 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:08:17,574 - INFO - Patient response generated: My stomach hurts. That's all I'm saying for now.
+2024-07-09 23:08:17,574 - INFO - Step Six: Updating the conversation history.
+2024-07-09 23:08:19,312 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:08:19,314 - INFO - Conversation history updated: The doctor asked the patient with ID 17546 and admission ID 190044 about their symptoms. The patient reported experiencing stomach pain but did not provide any additional information at that time. The current context is focused on the patient's primary symptom of stomach pain.
+2024-07-09 23:08:19,314 - INFO - Conversation history: The doctor asked the patient with ID 17546 and admission ID 190044 about their symptoms. The patient reported experiencing stomach pain but did not provide any additional information at that time. The current context is focused on the patient's primary symptom of stomach pain.
+2024-07-09 23:08:19,316 - INFO - Database connection closed.
+2024-07-09 23:08:36,389 - INFO - New patient drawn: 17546
+2024-07-09 23:08:49,761 - INFO - Graph generated and stored in session state.
+2024-07-09 23:09:26,582 - INFO - Extract relevant nodes and edges based on query.
+2024-07-09 23:09:29,457 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:09:29,459 - INFO - Nodes and edges extracted: {'Nodes': ['Admission', 'Symptom'], 'Relationships': ['HAS_SYMPTOM', 'HAS_NOSYMPTOM']}
+2024-07-09 23:09:29,460 - INFO - Step 1: Constructing Abstraction Cypher query prompt based on the doctor's query.
+2024-07-09 23:09:30,173 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:09:30,175 - INFO - Abstraction query in natural language generated: What symptoms does the patient have?
+2024-07-09 23:09:30,175 - INFO - Constructing Cypher query prompt based on the abstraction query.
+2024-07-09 23:09:33,553 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:09:33,555 - INFO - Abstraction cypher generated: MATCH (a:Admission {HADM_ID: 190044})-[r:HAS_SYMPTOM]->(s:Symptom)
+RETURN s.name AS Symptom
+UNION
+MATCH (a:Admission {HADM_ID: 190044})-[r:HAS_NOSYMPTOM]->(s:Symptom)
+RETURN s.name + ' (Not present)' AS Symptom
+2024-07-09 23:09:33,555 - INFO - Step 4: Executing the generated Cypher query.
+2024-07-09 23:09:36,678 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:09:36,680 - INFO - Abstraction Query result: ['abd pain', 'chest pain', 'epigastric pain', 'nonradiating epigastric abdominal pain', 'sob']
+2024-07-09 23:09:36,681 - INFO - Step Zero: The doctors has asked about: Could you tell me what are some of your symptoms? You can start with one.
+2024-07-09 23:09:36,681 - INFO - Step One: Constructing Cypher query prompt based on the doctor's query.
+2024-07-09 23:09:37,139 - INFO - Cypher query prompt truncated to 4096 characters.
+2024-07-09 23:09:39,271 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:09:39,272 - INFO - Cypher query generated: MATCH (a:Admission {HADM_ID: 190044})-[:HAS_SYMPTOM]->(s:Symptom)
+WITH a, s
+LIMIT 1
+RETURN s.name AS symptom
+2024-07-09 23:09:39,272 - INFO - Step Three: Executing the generated Cypher query.
+2024-07-09 23:09:40,962 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:09:40,964 - INFO - Query result: Based on the provided information, I can structure the response as follows:
+
+The patient with admission ID 190044 has reported a symptom of abdominal pain.
+2024-07-09 23:09:40,965 - INFO - Attempt 1: Evaluating the query result.
+2024-07-09 23:09:41,541 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:09:41,543 - INFO - Checked result: Y
+2024-07-09 23:09:41,543 - INFO - Checked result is appropriate. Breaking the loop.
+2024-07-09 23:09:41,543 - INFO - Step Five: Generating the patient response.
+2024-07-09 23:09:42,732 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:09:42,734 - INFO - Patient response generated: I'm experiencing abdominal pain. That's the primary symptom I've noticed.
+2024-07-09 23:09:42,734 - INFO - Step Six: Updating the conversation history.
+2024-07-09 23:09:44,606 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:09:44,608 - INFO - Conversation history updated: The doctor initiated the conversation by asking the patient about their symptoms. The patient, with ID 17546 and admission ID 190044, responded by stating that they are experiencing abdominal pain, which is the primary symptom they have noticed. The current context focuses on the patient's main symptom of abdominal pain.
+2024-07-09 23:09:44,608 - INFO - Conversation history: The doctor initiated the conversation by asking the patient about their symptoms. The patient, with ID 17546 and admission ID 190044, responded by stating that they are experiencing abdominal pain, which is the primary symptom they have noticed. The current context focuses on the patient's main symptom of abdominal pain.
+2024-07-09 23:09:44,609 - INFO - Database connection closed.
+2024-07-09 23:11:44,763 - INFO - Extract relevant nodes and edges based on query.
+2024-07-09 23:11:46,956 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:11:46,958 - INFO - Nodes and edges extracted: {'Nodes': ['History'], 'Relationships': ['HAS_MEDICAL_HISTORY']}
+2024-07-09 23:11:46,958 - INFO - Step 1: Constructing Abstraction Cypher query prompt based on the doctor's query.
+2024-07-09 23:11:48,006 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:11:48,008 - INFO - Abstraction query in natural language generated: What is the patient's medical history?
+2024-07-09 23:11:48,009 - INFO - Constructing Cypher query prompt based on the abstraction query.
+2024-07-09 23:11:50,258 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:11:50,260 - INFO - Abstraction cypher generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_MEDICAL_HISTORY]->(h:History) RETURN h.name
+2024-07-09 23:11:50,260 - INFO - Step 4: Executing the generated Cypher query.
+2024-07-09 23:11:56,851 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:11:56,853 - INFO - Abstraction Query result: ['Coronary artery disease s/p cath with PCI stent to LCx, RCA', 'Hypertension', "Crohn's disease", 'Hypercholesterolemia', 'BPH', 'Macular degeneration both eyes - legally blind', 'Hypothyroidism', 's/p 2 hip surgeries', 's/p back surgery', 's/p knee surgery', 'history of GI bleed d/t PUD', 'Colonic polyps', 'Chronic renal insufficiency baseline creat 1.3']
+2024-07-09 23:11:56,853 - INFO - Step Zero: The doctors has asked about: I am sorry to hear that. We will note this. Do you want to share some of your medical histories?
+2024-07-09 23:11:56,853 - INFO - Step One: Constructing Cypher query prompt based on the doctor's query.
+2024-07-09 23:11:57,301 - INFO - Cypher query prompt truncated to 4096 characters.
+2024-07-09 23:11:59,474 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:11:59,476 - INFO - Cypher query generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044}), (p)-[:HAS_MEDICAL_HISTORY]->(h:History) RETURN h.name AS MedicalHistory
+2024-07-09 23:11:59,476 - INFO - Step Three: Executing the generated Cypher query.
+2024-07-09 23:12:05,018 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:05,020 - INFO - Query result: Based on the provided information, I can structure the retrieved query results into natural language as follows:
+
+The patient's medical history includes:
+
+1. Coronary artery disease with a history of cardiac catheterization and percutaneous coronary intervention (PCI) with stent placement in the left circumflex (LCx) and right coronary artery (RCA)
+2. Hypertension
+3. Crohn's disease
+4. Hypercholesterolemia
+5. Benign prostatic hyperplasia (BPH)
+6. Macular degeneration in both eyes, resulting in legal blindness
+7. Hypothyroidism
+8. History of two hip surgeries
+9. History of back surgery
+10. History of knee surgery
+11. Past gastrointestinal (GI) bleed due to peptic ulcer disease (PUD)
+12. Colonic polyps
+13. Chronic renal insufficiency with a baseline creatinine level of 1.3
+
+This comprehensive medical history indicates that the patient has multiple chronic conditions affecting various body systems, including cardiovascular, gastrointestinal, endocrine, urological, and ophthalmological issues, as well as a history of several surgical procedures.
+2024-07-09 23:12:05,020 - INFO - Attempt 1: Evaluating the query result.
+2024-07-09 23:12:05,744 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:05,746 - INFO - Checked result: Y
+2024-07-09 23:12:05,746 - INFO - Checked result is appropriate. Breaking the loop.
+2024-07-09 23:12:05,746 - INFO - Step Five: Generating the patient response.
+2024-07-09 23:12:09,102 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:09,103 - INFO - Patient response generated: Yes, I have several medical conditions. Coronary artery disease with previous stents, hypertension, Crohn's disease, high cholesterol, BPH, macular degeneration causing legal blindness, and hypothyroidism. I've had surgeries on my hips, back, and knee. I also have a history of GI bleed from ulcers, colonic polyps, and chronic kidney issues with elevated creatinine. Is there anything specific you need to know about these conditions?
+2024-07-09 23:12:09,104 - INFO - Step Six: Updating the conversation history.
+2024-07-09 23:12:12,172 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:12,174 - INFO - Conversation history updated: The doctor initiated the conversation by asking about the patient's symptoms, to which the patient reported experiencing abdominal pain. The doctor then inquired about the patient's medical history. The patient disclosed a comprehensive list of medical conditions including coronary artery disease, hypertension, Crohn's disease, high cholesterol, BPH, macular degeneration, hypothyroidism, and chronic kidney issues. They also mentioned previous surgeries and a history of GI bleed from ulcers and colonic polyps. The current context focuses on the patient's extensive medical history.
+2024-07-09 23:12:12,174 - INFO - Conversation history: The doctor initiated the conversation by asking about the patient's symptoms, to which the patient reported experiencing abdominal pain. The doctor then inquired about the patient's medical history. The patient disclosed a comprehensive list of medical conditions including coronary artery disease, hypertension, Crohn's disease, high cholesterol, BPH, macular degeneration, hypothyroidism, and chronic kidney issues. They also mentioned previous surgeries and a history of GI bleed from ulcers and colonic polyps. The current context focuses on the patient's extensive medical history.
+2024-07-09 23:12:12,175 - INFO - Database connection closed.
+2024-07-09 23:12:39,277 - INFO - Extract relevant nodes and edges based on query.
+2024-07-09 23:12:41,664 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:41,667 - INFO - Nodes and edges extracted: {'Nodes': ['Allergy'], 'Relationships': ['HAS_MEDICAL_HISTORY']}
+2024-07-09 23:12:41,667 - INFO - Step 1: Constructing Abstraction Cypher query prompt based on the doctor's query.
+2024-07-09 23:12:43,608 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:43,611 - INFO - Abstraction query in natural language generated: What are the patient's allergies?
+2024-07-09 23:12:43,611 - INFO - Constructing Cypher query prompt based on the abstraction query.
+2024-07-09 23:12:46,068 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:46,070 - INFO - Abstraction cypher generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})-[:HAS_ALLERGY]->(allergy:Allergy)
+RETURN allergy.name AS Allergies
+2024-07-09 23:12:46,070 - INFO - Step 4: Executing the generated Cypher query.
+2024-07-09 23:12:48,160 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:48,161 - INFO - Abstraction Query result: ['Penicillins', 'Aspirin']
+2024-07-09 23:12:48,161 - INFO - Step Zero: The doctors has asked about: Do you have any allergies?
+2024-07-09 23:12:48,161 - INFO - Step One: Constructing Cypher query prompt based on the doctor's query.
+2024-07-09 23:12:48,646 - INFO - Cypher query prompt truncated to 4096 characters.
+2024-07-09 23:12:50,472 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:50,474 - INFO - Cypher query generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})-[:HAS_ALLERGY]->(allergy:Allergy) RETURN allergy.name
+2024-07-09 23:12:50,474 - INFO - Step Three: Executing the generated Cypher query.
+2024-07-09 23:12:52,827 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:52,829 - INFO - Query result: Based on the provided information, I can structure the retrieved query results into natural language as follows:
+
+The patient with Subject ID 17546, who has an admission with HADM_ID 190044, has allergies to Penicillins and Aspirin.
+2024-07-09 23:12:52,830 - INFO - Attempt 1: Evaluating the query result.
+2024-07-09 23:12:53,606 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:53,608 - INFO - Checked result: Y
+2024-07-09 23:12:53,608 - INFO - Checked result is appropriate. Breaking the loop.
+2024-07-09 23:12:53,608 - INFO - Step Five: Generating the patient response.
+2024-07-09 23:12:55,487 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:55,489 - INFO - Patient response generated: Yes, I have allergies to Penicillins and Aspirin. I'm careful to avoid these medications due to potential adverse reactions. It's important for you to be aware of these allergies for my treatment plan.
+2024-07-09 23:12:55,489 - INFO - Step Six: Updating the conversation history.
+2024-07-09 23:12:57,688 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:12:57,689 - INFO - Conversation history updated: The doctor continued the conversation by asking about the patient's allergies. The patient confirmed allergies to Penicillins and Aspirin, emphasizing the importance of avoiding these medications due to potential adverse reactions. The patient also stressed the significance of the doctor being aware of these allergies for treatment planning. The current context focuses on the patient's medication allergies.
+2024-07-09 23:12:57,690 - INFO - Conversation history: The doctor continued the conversation by asking about the patient's allergies. The patient confirmed allergies to Penicillins and Aspirin, emphasizing the importance of avoiding these medications due to potential adverse reactions. The patient also stressed the significance of the doctor being aware of these allergies for treatment planning. The current context focuses on the patient's medication allergies.
+2024-07-09 23:12:57,690 - INFO - Database connection closed.
+2024-07-09 23:34:09,955 - INFO - New patient drawn: 17546
+2024-07-09 23:34:24,368 - INFO - Graph generated and stored in session state.
+2024-07-09 23:34:56,719 - INFO - Extract relevant nodes and edges based on query.
+2024-07-09 23:34:59,357 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:34:59,364 - INFO - Nodes and edges extracted: {'Nodes': ['Symptom'], 'Relationships': ['HAS_SYMPTOM']}
+2024-07-09 23:34:59,364 - INFO - Step 1: Constructing Abstraction Cypher query prompt based on the doctor's query.
+2024-07-09 23:34:59,961 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:34:59,963 - INFO - Abstraction query in natural language generated: What symptoms does the patient have?
+2024-07-09 23:34:59,963 - INFO - Constructing Cypher query prompt based on the abstraction query.
+2024-07-09 23:35:02,521 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:02,523 - INFO - Abstraction cypher generated: MATCH (p:Patient {SUBJECT_ID: 17546})
+OPTIONAL MATCH (p)-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})-[:HAS_SYMPTOM]->(s:Symptom)
+RETURN s.name AS Symptom
+2024-07-09 23:35:02,523 - INFO - Step 4: Executing the generated Cypher query.
+2024-07-09 23:35:06,651 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:06,653 - INFO - Abstraction Query result: ['abd pain', 'chest pain', 'epigastric pain', 'nonradiating epigastric abdominal pain', 'sob']
+2024-07-09 23:35:06,653 - INFO - Step Zero: The doctors has asked about: Could you tell me what are some of your symptoms? You can start with one.
+2024-07-09 23:35:06,653 - INFO - Step One: Constructing Cypher query prompt based on the doctor's query.
+2024-07-09 23:35:07,117 - INFO - Cypher query prompt truncated to 4096 characters.
+2024-07-09 23:35:09,485 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:09,485 - INFO - Cypher query generated: MATCH (p:Patient {SUBJECT_ID: 17546})
+OPTIONAL MATCH (p)-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})-[:HAS_SYMPTOM]->(s:Symptom)
+RETURN s.name AS Symptom
+LIMIT 1
+2024-07-09 23:35:09,486 - INFO - Step Three: Executing the generated Cypher query.
+2024-07-09 23:35:11,533 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:11,535 - INFO - Query result: Based on the provided information, I can structure the response as follows:
+
+The patient with Subject ID 17546, who has an admission with HADM_ID 190044, reports a symptom of abdominal pain.
+2024-07-09 23:35:11,535 - INFO - Attempt 1: Evaluating the query result.
+2024-07-09 23:35:12,146 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:12,147 - INFO - Checked result: Y
+2024-07-09 23:35:12,147 - INFO - Checked result is appropriate. Breaking the loop.
+2024-07-09 23:35:12,147 - INFO - Step Five: Generating the patient response.
+2024-07-09 23:35:13,276 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:13,277 - INFO - Patient response generated: Abdominal pain. That's the primary symptom I'm experiencing.
+2024-07-09 23:35:13,278 - INFO - Step Six: Updating the conversation history.
+2024-07-09 23:35:15,014 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:15,015 - INFO - Conversation history updated: The doctor initiated the conversation by asking the patient about their symptoms. The patient, with ID 17546 and admission ID 190044, responded that their primary symptom is abdominal pain. The current focus is on the patient's reported abdominal pain.
+2024-07-09 23:35:15,015 - INFO - Conversation history: The doctor initiated the conversation by asking the patient about their symptoms. The patient, with ID 17546 and admission ID 190044, responded that their primary symptom is abdominal pain. The current focus is on the patient's reported abdominal pain.
+2024-07-09 23:35:15,016 - INFO - Database connection closed.
+2024-07-09 23:35:28,517 - INFO - Extract relevant nodes and edges based on query.
+2024-07-09 23:35:30,633 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:30,635 - INFO - Nodes and edges extracted: {'Nodes': ['History'], 'Relationships': ['HAS_MEDICAL_HISTORY']}
+2024-07-09 23:35:30,635 - INFO - Step 1: Constructing Abstraction Cypher query prompt based on the doctor's query.
+2024-07-09 23:35:31,209 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:31,210 - INFO - Abstraction query in natural language generated: What is the patient's medical history?
+2024-07-09 23:35:31,210 - INFO - Constructing Cypher query prompt based on the abstraction query.
+2024-07-09 23:35:33,857 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:33,858 - INFO - Abstraction cypher generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_MEDICAL_HISTORY]->(h:History)
+RETURN h.name AS MedicalHistory
+2024-07-09 23:35:33,858 - INFO - Step 4: Executing the generated Cypher query.
+2024-07-09 23:35:40,001 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:40,002 - INFO - Abstraction Query result: ['Coronary artery disease s/p cath with PCI stent to LCx, RCA', 'Hypertension', "Crohn's disease", 'Hypercholesterolemia', 'BPH', 'Macular degeneration both eyes - legally blind', 'Hypothyroidism', 's/p 2 hip surgeries', 's/p back surgery', 's/p knee surgery', 'history of GI bleed d/t PUD', 'Colonic polyps', 'Chronic renal insufficiency baseline creat 1.3']
+2024-07-09 23:35:40,002 - INFO - Step Zero: The doctors has asked about: I am sorry to hear that. We will note this. Do you want to share some of your medical histories?
+2024-07-09 23:35:40,002 - INFO - Step One: Constructing Cypher query prompt based on the doctor's query.
+2024-07-09 23:35:40,458 - INFO - Cypher query prompt truncated to 4096 characters.
+2024-07-09 23:35:42,581 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:42,582 - INFO - Cypher query generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044}), (p)-[:HAS_MEDICAL_HISTORY]->(h:History) RETURN h.name AS MedicalHistory
+2024-07-09 23:35:42,582 - INFO - Step Three: Executing the generated Cypher query.
+2024-07-09 23:35:48,948 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:48,949 - INFO - Query result: Based on the retrieved results, I can provide the following structured response:
+
+The patient has a significant medical history that includes:
+
+1. Coronary artery disease with a history of catheterization and percutaneous coronary intervention (PCI) with stent placement in the left circumflex (LCx) and right coronary artery (RCA)
+2. Hypertension
+3. Crohn's disease
+4. Hypercholesterolemia
+5. Benign prostatic hyperplasia (BPH)
+6. Macular degeneration in both eyes, resulting in legal blindness
+7. Hypothyroidism
+8. History of two hip surgeries
+9. History of back surgery
+10. History of knee surgery
+11. Past gastrointestinal (GI) bleed due to peptic ulcer disease (PUD)
+12. Colonic polyps
+13. Chronic renal insufficiency with a baseline creatinine of 1.3
+
+This comprehensive medical history indicates multiple chronic conditions affecting various body systems, including cardiovascular, gastrointestinal, endocrine, urological, ophthalmological, and renal systems, as well as a history of multiple surgical interventions.
+2024-07-09 23:35:48,950 - INFO - Attempt 1: Evaluating the query result.
+2024-07-09 23:35:49,758 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:49,760 - INFO - Checked result: Y
+2024-07-09 23:35:49,760 - INFO - Checked result is appropriate. Breaking the loop.
+2024-07-09 23:35:49,760 - INFO - Step Five: Generating the patient response.
+2024-07-09 23:35:53,625 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:53,626 - INFO - Patient response generated: Yes, I have several medical conditions. Coronary artery disease with stents in my left circumflex and right coronary artery. I also have hypertension, Crohn's disease, high cholesterol, and BPH. I'm legally blind from macular degeneration and have hypothyroidism. I've had surgeries on my hips, back, and knee. There's also a history of GI bleeding from ulcers, colon polyps, and chronic kidney issues with a baseline creatinine of 1.3.
+2024-07-09 23:35:53,627 - INFO - Step Six: Updating the conversation history.
+2024-07-09 23:35:57,593 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:35:57,595 - INFO - Conversation history updated: The doctor initiated the conversation by asking the patient about their symptoms. The patient, with ID 17546 and admission ID 190044, reported abdominal pain as their primary symptom. The doctor acknowledged this and inquired about the patient's medical history. The patient disclosed a comprehensive medical history, including coronary artery disease with stents, hypertension, Crohn's disease, high cholesterol, BPH, legal blindness due to macular degeneration, hypothyroidism, multiple surgeries, a history of GI bleeding from ulcers, colon polyps, and chronic kidney issues. The current focus is on the patient's extensive medical history, which may be relevant to their presenting abdominal pain.
+2024-07-09 23:35:57,595 - INFO - Conversation history: The doctor initiated the conversation by asking the patient about their symptoms. The patient, with ID 17546 and admission ID 190044, reported abdominal pain as their primary symptom. The doctor acknowledged this and inquired about the patient's medical history. The patient disclosed a comprehensive medical history, including coronary artery disease with stents, hypertension, Crohn's disease, high cholesterol, BPH, legal blindness due to macular degeneration, hypothyroidism, multiple surgeries, a history of GI bleeding from ulcers, colon polyps, and chronic kidney issues. The current focus is on the patient's extensive medical history, which may be relevant to their presenting abdominal pain.
+2024-07-09 23:35:57,597 - INFO - Database connection closed.
+2024-07-09 23:36:11,937 - INFO - Extract relevant nodes and edges based on query.
+2024-07-09 23:36:14,274 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:36:14,276 - INFO - Nodes and edges extracted: {'Nodes': ['Allergy'], 'Relationships': ['HAS_MEDICAL_HISTORY']}
+2024-07-09 23:36:14,276 - INFO - Step 1: Constructing Abstraction Cypher query prompt based on the doctor's query.
+2024-07-09 23:36:15,226 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:36:15,228 - INFO - Abstraction query in natural language generated: What are the patient's allergies?
+2024-07-09 23:36:15,228 - INFO - Constructing Cypher query prompt based on the abstraction query.
+2024-07-09 23:36:17,987 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:36:17,989 - INFO - Abstraction cypher generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})-[:HAS_ALLERGY]->(allergy:Allergy) RETURN allergy.name
+2024-07-09 23:36:17,989 - INFO - Step 4: Executing the generated Cypher query.
+2024-07-09 23:36:20,086 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:36:20,087 - INFO - Abstraction Query result: ['Penicillins', 'Aspirin']
+2024-07-09 23:36:20,087 - INFO - Step Zero: The doctors has asked about: Do you have any allergies?
+2024-07-09 23:36:20,087 - INFO - Step One: Constructing Cypher query prompt based on the doctor's query.
+2024-07-09 23:36:20,505 - INFO - Cypher query prompt truncated to 4096 characters.
+2024-07-09 23:36:22,702 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:36:22,703 - INFO - Cypher query generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})-[:HAS_ALLERGY]->(allergy:Allergy) RETURN allergy.name
+2024-07-09 23:36:22,704 - INFO - Step Three: Executing the generated Cypher query.
+2024-07-09 23:36:24,851 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:36:24,852 - INFO - Query result: Based on the provided information, I can structure the retrieved query results into natural language as follows:
+
+The patient with Subject ID 17546, who has an admission with HADM_ID 190044, has allergies to Penicillins and Aspirin.
+2024-07-09 23:36:24,852 - INFO - Attempt 1: Evaluating the query result.
+2024-07-09 23:36:25,550 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:36:25,551 - INFO - Checked result: Y
+2024-07-09 23:36:25,551 - INFO - Checked result is appropriate. Breaking the loop.
+2024-07-09 23:36:25,551 - INFO - Step Five: Generating the patient response.
+2024-07-09 23:36:27,320 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:36:27,321 - INFO - Patient response generated: Yes, I have allergies to Penicillins and Aspirin. I'm careful to avoid these medications due to potential adverse reactions.
+2024-07-09 23:36:27,322 - INFO - Step Six: Updating the conversation history.
+2024-07-09 23:36:27,336 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 502 Bad Gateway"
+2024-07-09 23:36:27,337 - INFO - Retrying request to /model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke in 0.808033 seconds
+2024-07-09 23:36:32,019 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:36:32,020 - INFO - Conversation history updated: The doctor initially asked about the patient's symptoms, and the patient (ID 17546, admission ID 190044) reported abdominal pain. The doctor then inquired about the patient's medical history, which is extensive and includes coronary artery disease, hypertension, Crohn's disease, high cholesterol, BPH, legal blindness, hypothyroidism, multiple surgeries, GI bleeding history, colon polyps, and chronic kidney issues. When asked about allergies, the patient confirmed allergies to Penicillins and Aspirin, stating they are careful to avoid these medications due to potential adverse reactions. The current focus is on the patient's allergies, which are important to note given their complex medical history and current abdominal pain complaint.
+2024-07-09 23:36:32,020 - INFO - Conversation history: The doctor initially asked about the patient's symptoms, and the patient (ID 17546, admission ID 190044) reported abdominal pain. The doctor then inquired about the patient's medical history, which is extensive and includes coronary artery disease, hypertension, Crohn's disease, high cholesterol, BPH, legal blindness, hypothyroidism, multiple surgeries, GI bleeding history, colon polyps, and chronic kidney issues. When asked about allergies, the patient confirmed allergies to Penicillins and Aspirin, stating they are careful to avoid these medications due to potential adverse reactions. The current focus is on the patient's allergies, which are important to note given their complex medical history and current abdominal pain complaint.
+2024-07-09 23:36:32,021 - INFO - Database connection closed.
+2024-07-09 23:40:13,613 - INFO - New patient drawn: 17546
+2024-07-09 23:40:26,847 - INFO - Graph generated and stored in session state.
+2024-07-09 23:43:09,953 - INFO - New patient drawn: 17546
+2024-07-09 23:43:24,095 - INFO - Graph generated and stored in session state.
+2024-07-09 23:46:44,832 - INFO - New patient drawn: 17546
+2024-07-09 23:46:59,226 - INFO - Graph generated and stored in session state.
+2024-07-09 23:49:59,522 - INFO - New patient drawn: 17546
+2024-07-09 23:50:13,670 - INFO - Graph generated and stored in session state.
+2024-07-09 23:50:57,023 - INFO - Extract relevant nodes and edges based on query.
+2024-07-09 23:50:59,465 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:50:59,471 - INFO - Nodes and edges extracted: {'Nodes': ['Symptom'], 'Relationships': ['HAS_SYMPTOM']}
+2024-07-09 23:50:59,471 - INFO - Step 1: Constructing Abstraction Cypher query prompt based on the doctor's query.
+2024-07-09 23:51:00,164 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:00,165 - INFO - Abstraction query in natural language generated: What symptoms does the patient have?
+2024-07-09 23:51:00,165 - INFO - Constructing Cypher query prompt based on the abstraction query.
+2024-07-09 23:51:02,946 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:02,947 - INFO - Abstraction cypher generated: MATCH (p:Patient {SUBJECT_ID: 17546})
+MATCH (p)-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})
+MATCH (a)-[:HAS_SYMPTOM]->(s:Symptom)
+RETURN s.name AS Symptom
+2024-07-09 23:51:02,947 - INFO - Step 4: Executing the generated Cypher query.
+2024-07-09 23:51:06,427 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:06,428 - INFO - Abstraction Query result: ['abd pain', 'chest pain', 'epigastric pain', 'nonradiating epigastric abdominal pain', 'sob']
+2024-07-09 23:51:06,429 - INFO - Step Zero: The doctors has asked about: Could you tell me what are some of your symptoms? You can start with one.
+2024-07-09 23:51:06,429 - INFO - Step One: Constructing Cypher query prompt based on the doctor's query.
+2024-07-09 23:51:06,853 - INFO - Cypher query prompt truncated to 4096 characters.
+2024-07-09 23:51:09,296 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:09,297 - INFO - Cypher query generated: MATCH (p:Patient {SUBJECT_ID: 17546})
+OPTIONAL MATCH (p)-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})-[:HAS_SYMPTOM]->(s:Symptom)
+RETURN s.name AS Symptom
+LIMIT 1
+2024-07-09 23:51:09,298 - INFO - Step Three: Executing the generated Cypher query.
+2024-07-09 23:51:11,547 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:11,549 - INFO - Query result: Based on the cypher query and the retrieved results, I can provide the following structured response:
+
+The patient with SUBJECT_ID 17546, who has an admission with HADM_ID 190044, reported a symptom of abdominal pain.
+2024-07-09 23:51:11,549 - INFO - Attempt 1: Evaluating the query result.
+2024-07-09 23:51:12,061 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:12,063 - INFO - Checked result: Y
+2024-07-09 23:51:12,063 - INFO - Checked result is appropriate. Breaking the loop.
+2024-07-09 23:51:12,063 - INFO - Step Five: Generating the patient response.
+2024-07-09 23:51:13,159 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:13,161 - INFO - Patient response generated: Abdominal pain. That's the primary symptom I'm experiencing.
+2024-07-09 23:51:13,161 - INFO - Step Six: Updating the conversation history.
+2024-07-09 23:51:15,013 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:15,015 - INFO - Conversation history updated: The doctor initiated the conversation by asking the patient about their symptoms. The patient, with ID 17546 and admission ID 190044, reported that their primary symptom is abdominal pain. The current context focuses on the patient's main complaint of abdominal pain.
+2024-07-09 23:51:15,015 - INFO - Conversation history: The doctor initiated the conversation by asking the patient about their symptoms. The patient, with ID 17546 and admission ID 190044, reported that their primary symptom is abdominal pain. The current context focuses on the patient's main complaint of abdominal pain.
+2024-07-09 23:51:15,017 - INFO - Database connection closed.
+2024-07-09 23:51:25,573 - INFO - Extract relevant nodes and edges based on query.
+2024-07-09 23:51:27,931 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:27,933 - INFO - Nodes and edges extracted: {'Nodes': ['History'], 'Relationships': ['HAS_MEDICAL_HISTORY']}
+2024-07-09 23:51:27,933 - INFO - Step 1: Constructing Abstraction Cypher query prompt based on the doctor's query.
+2024-07-09 23:51:28,666 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:28,667 - INFO - Abstraction query in natural language generated: What is the patient's medical history?
+2024-07-09 23:51:28,667 - INFO - Constructing Cypher query prompt based on the abstraction query.
+2024-07-09 23:51:30,825 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:30,827 - INFO - Abstraction cypher generated: MATCH (p:Patient {SUBJECT_ID: 17546})
+OPTIONAL MATCH (p)-[:HAS_MEDICAL_HISTORY]->(h:History)
+RETURN h.name AS MedicalHistory
+2024-07-09 23:51:30,827 - INFO - Step 4: Executing the generated Cypher query.
+2024-07-09 23:51:37,217 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:37,218 - INFO - Abstraction Query result: ['Coronary artery disease s/p cath with PCI stent to LCx, RCA', 'Hypertension', "Crohn's disease", 'Hypercholesterolemia', 'BPH', 'Macular degeneration both eyes - legally blind', 'Hypothyroidism', 's/p 2 hip surgeries', 's/p back surgery', 's/p knee surgery', 'history of GI bleed d/t PUD', 'Colonic polyps', 'Chronic renal insufficiency baseline creat 1.3']
+2024-07-09 23:51:37,218 - INFO - Step Zero: The doctors has asked about: I am sorry to hear that. We will note this. Do you want to share some of your medical histories?
+2024-07-09 23:51:37,218 - INFO - Step One: Constructing Cypher query prompt based on the doctor's query.
+2024-07-09 23:51:37,674 - INFO - Cypher query prompt truncated to 4096 characters.
+2024-07-09 23:51:40,221 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:40,223 - INFO - Cypher query generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044}), (p)-[:HAS_MEDICAL_HISTORY]->(h:History) RETURN h.name AS MedicalHistory
+2024-07-09 23:51:40,224 - INFO - Step Three: Executing the generated Cypher query.
+2024-07-09 23:51:46,466 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:46,467 - INFO - Query result: Based on the provided information, I can structure the retrieved query results into natural language as follows:
+
+The patient has a significant medical history that includes:
+
+1. Coronary artery disease with a history of catheterization and percutaneous coronary intervention (PCI) with stent placement in the left circumflex artery (LCx) and right coronary artery (RCA)
+2. Hypertension
+3. Crohn's disease
+4. Hypercholesterolemia
+5. Benign prostatic hyperplasia (BPH)
+6. Macular degeneration in both eyes, resulting in legal blindness
+7. Hypothyroidism
+8. History of two hip surgeries
+9. History of back surgery
+10. History of knee surgery
+11. Previous gastrointestinal (GI) bleed due to peptic ulcer disease (PUD)
+12. Colonic polyps
+13. Chronic renal insufficiency with a baseline creatinine level of 1.3
+
+This comprehensive medical history indicates that the patient has multiple chronic conditions affecting various body systems, including cardiovascular, gastrointestinal, endocrine, urological, and ophthalmological issues, as well as a history of multiple surgeries and renal impairment.
+2024-07-09 23:51:46,468 - INFO - Attempt 1: Evaluating the query result.
+2024-07-09 23:51:47,285 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:47,286 - INFO - Checked result: Y
+2024-07-09 23:51:47,286 - INFO - Checked result is appropriate. Breaking the loop.
+2024-07-09 23:51:47,286 - INFO - Step Five: Generating the patient response.
+2024-07-09 23:51:51,176 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:51,177 - INFO - Patient response generated: Yes, I have several medical conditions. Coronary artery disease with stents in my LCx and RCA. Hypertension and high cholesterol. Crohn's disease. BPH. Legally blind from macular degeneration. Hypothyroidism. Multiple surgeries - two hips, back, and knee. Had a GI bleed from ulcers before. Colonic polyps. Chronic kidney problems with baseline creatinine of 1.3. Is there anything specific you need more details on?
+2024-07-09 23:51:51,177 - INFO - Step Six: Updating the conversation history.
+2024-07-09 23:51:54,630 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:51:54,632 - INFO - Conversation history updated: The doctor began by inquiring about the patient's symptoms, and the patient (ID 17546, admission ID 190044) reported abdominal pain as their main complaint. The doctor then asked about the patient's medical history. In response, the patient disclosed a comprehensive list of conditions including coronary artery disease with stents, hypertension, high cholesterol, Crohn's disease, BPH, legal blindness due to macular degeneration, hypothyroidism, multiple orthopedic surgeries, previous GI bleed from ulcers, colonic polyps, and chronic kidney problems. The current context focuses on the patient's extensive medical history.
+2024-07-09 23:51:54,633 - INFO - Conversation history: The doctor began by inquiring about the patient's symptoms, and the patient (ID 17546, admission ID 190044) reported abdominal pain as their main complaint. The doctor then asked about the patient's medical history. In response, the patient disclosed a comprehensive list of conditions including coronary artery disease with stents, hypertension, high cholesterol, Crohn's disease, BPH, legal blindness due to macular degeneration, hypothyroidism, multiple orthopedic surgeries, previous GI bleed from ulcers, colonic polyps, and chronic kidney problems. The current context focuses on the patient's extensive medical history.
+2024-07-09 23:51:54,634 - INFO - Database connection closed.
+2024-07-09 23:52:14,377 - INFO - Extract relevant nodes and edges based on query.
+2024-07-09 23:52:16,676 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:52:16,678 - INFO - Nodes and edges extracted: {'Nodes': ['Allergy'], 'Relationships': ['HAS_ALLERGY']}
+2024-07-09 23:52:16,678 - INFO - Step 1: Constructing Abstraction Cypher query prompt based on the doctor's query.
+2024-07-09 23:52:17,598 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:52:17,599 - INFO - Abstraction query in natural language generated: What are the patient's allergies?
+2024-07-09 23:52:17,599 - INFO - Constructing Cypher query prompt based on the abstraction query.
+2024-07-09 23:52:20,086 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:52:20,088 - INFO - Abstraction cypher generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})-[:HAS_ALLERGY]->(allergy:Allergy) RETURN allergy.name
+2024-07-09 23:52:20,088 - INFO - Step 4: Executing the generated Cypher query.
+2024-07-09 23:52:21,820 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:52:21,822 - INFO - Abstraction Query result: ['Penicillins', 'Aspirin']
+2024-07-09 23:52:21,823 - INFO - Step Zero: The doctors has asked about: Do you have any allergies?
+2024-07-09 23:52:21,823 - INFO - Step One: Constructing Cypher query prompt based on the doctor's query.
+2024-07-09 23:52:22,249 - INFO - Cypher query prompt truncated to 4096 characters.
+2024-07-09 23:52:24,441 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:52:24,443 - INFO - Cypher query generated: MATCH (p:Patient {SUBJECT_ID: 17546})-[:HAS_ADMISSION]->(a:Admission {HADM_ID: 190044})-[:HAS_ALLERGY]->(al:Allergy) RETURN al.name
+2024-07-09 23:52:24,444 - INFO - Step Three: Executing the generated Cypher query.
+2024-07-09 23:52:26,608 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:52:26,609 - INFO - Query result: Based on the provided information, I can structure the retrieved query results into natural language as follows:
+
+The patient with Subject ID 17546, who has an admission with HADM ID 190044, has allergies to Penicillins and Aspirin.
+2024-07-09 23:52:26,609 - INFO - Attempt 1: Evaluating the query result.
+2024-07-09 23:52:27,223 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:52:27,225 - INFO - Checked result: Y
+2024-07-09 23:52:27,225 - INFO - Checked result is appropriate. Breaking the loop.
+2024-07-09 23:52:27,225 - INFO - Step Five: Generating the patient response.
+2024-07-09 23:52:28,890 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:52:28,891 - INFO - Patient response generated: Yes, I have allergies to Penicillins and Aspirin. It's important for my medical care that these allergies are noted and avoided in any treatments or prescriptions.
+2024-07-09 23:52:28,891 - INFO - Step Six: Updating the conversation history.
+2024-07-09 23:52:32,651 - INFO - HTTP Request: POST https://bedrock-runtime.us-east-1.amazonaws.com/model/anthropic.claude-3-5-sonnet-20240620-v1:0/invoke "HTTP/1.1 200 OK"
+2024-07-09 23:52:32,652 - INFO - Conversation history updated: The doctor continued the consultation by asking about the patient's allergies. The patient (ID 17546, admission ID 190044) confirmed allergies to Penicillins and Aspirin, emphasizing the importance of noting these allergies for their medical care. This information adds to the patient's comprehensive medical history, which includes coronary artery disease, hypertension, Crohn's disease, and various other conditions. The current context focuses on the patient's drug allergies, which are critical for safe treatment planning.
+2024-07-09 23:52:32,652 - INFO - Conversation history: The doctor continued the consultation by asking about the patient's allergies. The patient (ID 17546, admission ID 190044) confirmed allergies to Penicillins and Aspirin, emphasizing the importance of noting these allergies for their medical care. This information adds to the patient's comprehensive medical history, which includes coronary artery disease, hypertension, Crohn's disease, and various other conditions. The current context focuses on the patient's drug allergies, which are critical for safe treatment planning.
+2024-07-09 23:52:32,653 - INFO - Database connection closed.
