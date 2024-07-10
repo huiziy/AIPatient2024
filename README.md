@@ -60,6 +60,7 @@ streamlit run AIPatient_Interface.py
 
 ### Demo
 
+[![AIPatient Overview and Demo](https://i.sstatic.net/Vp2cE.png)](https://youtu.be/RlUPmanXNgA)
 
 ## Our Core Team
 Huizi Yu,  huiziy@amazon.com, Data Scientist @ Amazon Science, VA, US 
