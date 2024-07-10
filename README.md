@@ -34,6 +34,14 @@
 
 In <strong>Figure 4</strong>, we present one round of user-AIPatient interaction. Beginning with user's natural language query input, the backend of AIPatient engages various agents and update the session state accordingly. Finally, the Simulated Patient answers the user's query using natural language. 
 
+## Future Directions and Implications
+We are currently working on:
+- Onboarding 46,000+ patients’ EHR to our AIPatient platform
+- Evaluating model and workflow capability 
+- Enriching the knowledge graph with additional medical entities and relationships
+- Optimizing for computation efficiency 
+
+
 ## QuickStart
 ### Install Environment
 ```
