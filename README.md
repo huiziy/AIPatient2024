@@ -71,6 +71,8 @@ streamlit run AIPatient_Interface.py
 
 ### Demo
 
+AIPatient participated in Build with Claude June 2024 contest. Click below for detailed overview and demo. 
+
 [![AIPatient Overview and Demo](https://raw.githubusercontent.com/huiziy/AIPatient_Image/master/AIPatient_Cover.png)](https://youtu.be/RlUPmanXNgA)
 
 ## Our Core Team
