@@ -69,18 +69,6 @@ cd src
 streamlit run AIPatient_Interface.py
 ```
 
-### Demo
-
-AIPatient participated in Build with Claude June 2024 contest. Click below for detailed overview and demo. 
-
-[![AIPatient Overview and Demo](https://raw.githubusercontent.com/huiziy/AIPatient_Image/master/AIPatient_Cover.png)](https://youtu.be/RlUPmanXNgA)
-
-## Our Core Team
-Huizi Yu,  huiziy@amazon.com, Data Scientist @ Amazon Science, VA, US 
-<br />Lizhou Fan, lizhouf@umich.edu, Research Fellow @ Harvard Medical School (Incoming), MA, US 
-<br />Jiayan Zhou, jyzhou@stanford.edu, Research Fellow @ Stanford University, CA, US
-<br />Lingyao Li, lingyaol@umich.edu, Research Fellow @ University of Michigan, MI, US
-
 ## License
 The source code of AIPatient is licensed under [Apache 2.0](https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE). The intended purpose is solely for research use.
 
